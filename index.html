@@ -6,375 +6,261 @@
 <title>Smart Marking System</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
-    background:#f4f6f8;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
     color:#222;
 }
 
-/* HEADER */
 header{
-    background:linear-gradient(135deg,#1f4e78,#2878b5);
+    background:linear-gradient(135deg,#173b7a,#2563eb);
     color:white;
-    padding:28px 20px;
+    padding:25px 15px;
     text-align:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.15);
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
 header h1{
-    margin:0;
+    margin:0 0 8px;
     font-size:30px;
 }
 
 header p{
-    margin:8px 0 0;
+    margin:0;
     opacity:.9;
 }
 
-/* CONTAINER */
 .container{
     width:95%;
-    max-width:1250px;
+    max-width:1200px;
     margin:25px auto;
 }
 
-/* CARDS */
 .card{
     background:white;
-    padding:22px;
-    margin-bottom:22px;
-    border-radius:14px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-h2{
+.card h2{
     margin-top:0;
-    color:#1f4e78;
+    color:#173b7a;
 }
 
-/* INPUTS */
-label{
-    display:block;
-    margin-top:12px;
-    font-weight:bold;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
 input,select,button{
     width:100%;
     padding:11px;
-    margin-top:7px;
+    margin-top:6px;
+    border-radius:8px;
     border:1px solid #ccc;
-    border-radius:7px;
     font-size:15px;
 }
 
-input:focus,select:focus{
-    outline:none;
-    border-color:#2878b5;
-    box-shadow:0 0 0 2px rgba(40,120,181,.1);
-}
-
-/* BUTTONS */
 button{
-    background:#1f4e78;
-    color:white;
     border:none;
+    background:#2563eb;
+    color:white;
     cursor:pointer;
-    margin-top:15px;
-    transition:.2s;
+    font-weight:bold;
 }
 
 button:hover{
-    background:#163a5a;
-    transform:translateY(-1px);
+    opacity:.9;
 }
 
-/* SUBJECTS */
-.subject-row{
-    display:flex;
-    gap:10px;
-    margin-top:10px;
+.btn-danger{
+    background:#dc2626;
 }
 
-.subject-row input{
-    flex:1;
+.btn-success{
+    background:#16a34a;
 }
 
-.subject-row button{
-    width:160px;
+.btn-secondary{
+    background:#64748b;
 }
 
-.subjects{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:16px;
-}
-
-.subject{
-    background:#e8f1f8;
-    padding:9px 13px;
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    gap:9px;
-    color:#1f4e78;
+label{
     font-weight:bold;
+    display:block;
+    margin-top:8px;
 }
 
-.subject button{
-    width:auto;
-    margin:0;
-    padding:3px 8px;
-    background:#c0392b;
-    border-radius:50%;
-}
-
-/* DASHBOARD */
-.dashboard{
+.stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:22px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
 }
 
 .stat{
-    background:white;
-    padding:22px;
-    border-radius:14px;
-    text-align:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
-    border-top:4px solid #1f4e78;
+    background:#f8fafc;
+    border-left:5px solid #2563eb;
+    padding:18px;
+    border-radius:10px;
 }
 
 .stat h3{
-    margin:0;
-    color:#666;
+    margin:0 0 8px;
     font-size:15px;
+    color:#64748b;
 }
 
 .stat p{
-    font-size:27px;
+    margin:0;
+    font-size:25px;
     font-weight:bold;
-    color:#1f4e78;
-    margin:10px 0 0;
-}
-
-/* MARKS */
-.marks-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-/* TABLE */
-.table-container{
-    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:15px;
-    min-width:650px;
 }
 
 th,td{
-    border:1px solid #ddd;
-    padding:11px;
+    padding:12px;
+    border-bottom:1px solid #ddd;
     text-align:center;
 }
 
 th{
-    background:#1f4e78;
+    background:#173b7a;
     color:white;
 }
 
-tr:nth-child(even){
-    background:#f8fafc;
+.table-container{
+    overflow-x:auto;
 }
 
-.action-btn{
+.action-buttons{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+}
+
+.action-buttons button{
     width:auto;
-    padding:7px 10px;
-    margin:2px;
+    padding:8px 12px;
 }
 
-.edit-btn{
-    background:#f39c12;
+.subject-item{
+    display:flex;
+    gap:8px;
+    margin-bottom:8px;
 }
 
-.report-btn{
-    background:#27ae60;
+.subject-item input{
+    margin-top:0;
 }
 
-.delete-btn{
-    background:#c0392b;
+.subject-item button{
+    width:auto;
+    margin-top:6px;
 }
 
-.message{
-    padding:11px;
-    background:#fff3cd;
-    border-radius:7px;
-    margin-top:12px;
-    color:#664d03;
-}
-
-/* EDIT */
-#editSection{
+.hidden{
     display:none;
-    border-left:5px solid #f39c12;
 }
 
-.edit-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+.empty{
+    text-align:center;
+    color:#777;
+    padding:20px;
 }
 
-.cancel-edit{
-    background:#555;
-}
-
-/* REPORT */
-#reportCard{
+.logo-preview{
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-top:10px;
     display:none;
+}
+
+.report-card{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
 }
 
 .report-header{
     text-align:center;
-    border-bottom:2px solid #1f4e78;
+    border-bottom:2px solid #173b7a;
     padding-bottom:15px;
     margin-bottom:20px;
 }
 
-.report-header h1{
-    color:#1f4e78;
+.report-header img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    display:none;
+    margin:0 auto 10px;
 }
 
-.student-info{
+.report-header h1{
+    margin:5px 0;
+    color:#173b7a;
+}
+
+.report-header p{
+    margin:4px 0;
+}
+
+.report-info{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
     margin-bottom:20px;
 }
 
-.info-box{
-    border:1px solid #ddd;
-    padding:12px;
-    border-radius:6px;
-}
-
-.summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:20px;
-}
-
-.summary-box{
-    border:1px solid #ddd;
-    padding:16px;
-    text-align:center;
-    border-radius:7px;
-}
-
-.summary-box strong{
-    display:block;
-    font-size:21px;
-    margin-top:6px;
-    color:#1f4e78;
-}
-
-.close-report{
-    background:#555;
-}
-
-/* EMPTY STATE */
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#777;
-}
-
-/* PRINT */
-@media print{
-
-    body *{
-        visibility:hidden;
-    }
-
-    #reportCard,
-    #reportCard *{
-        visibility:visible;
-    }
-
-    #reportCard{
-        display:block;
-        position:absolute;
-        left:0;
-        top:0;
-        width:100%;
-        padding:30px;
-        box-shadow:none;
-    }
-
-    .print-hide{
-        display:none!important;
-    }
-}
-
-/* MOBILE */
-@media(max-width:800px){
-
+@media(max-width:600px){
     header h1{
         font-size:24px;
     }
 
-    .dashboard{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .marks-grid,
-    .edit-grid{
+    .report-info{
         grid-template-columns:1fr;
     }
 
-    .subject-row{
-        flex-direction:column;
-    }
-
-    .subject-row button{
-        width:100%;
-    }
-
-    .student-info,
-    .summary{
-        grid-template-columns:1fr;
+    th,td{
+        font-size:13px;
+        padding:8px;
     }
 }
 
-@media(max-width:500px){
-
-    .container{
-        width:92%;
+@media print{
+    body *{
+        visibility:hidden;
     }
 
-    .card{
-        padding:16px;
+    #reportSection,
+    #reportSection *{
+        visibility:visible;
     }
 
-    .dashboard{
-        grid-template-columns:1fr;
+    #reportSection{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
     }
 
-    .stat p{
-        font-size:24px;
+    .no-print{
+        display:none!important;
     }
 }
 </style>
@@ -383,1495 +269,1259 @@ tr:nth-child(even){
 <body>
 
 <header>
-    <h1>📚 Smart Marking System</h1>
-    <p>Primary → O-Level → A-Level → University</p>
+    <h1 id="headerSchoolName">📚 Smart Marking System</h1>
+    <p>Manage students, marks, grades and reports easily</p>
 </header>
 
 <div class="container">
 
-<!-- CLASS -->
+<!-- SCHOOL PROFILE -->
+<div class="card">
+    <h2>🏫 School Profile</h2>
 
-<div class="card print-hide">
+    <div class="grid">
 
-<h2>🏫 Create / Select Class</h2>
+        <div>
+            <label>School Name</label>
+            <input type="text" id="schoolName" placeholder="Enter school name">
+        </div>
 
-<label>Education Level</label>
+        <div>
+            <label>School Address</label>
+            <input type="text" id="schoolAddress" placeholder="Enter school address">
+        </div>
 
-<select id="level" onchange="updateClassOptions()">
-<option value="Primary">Primary</option>
-<option value="O-Level">O-Level</option>
-<option value="A-Level">A-Level</option>
-<option value="University">University</option>
-</select>
+        <div>
+            <label>School Phone</label>
+            <input type="text" id="schoolPhone" placeholder="Enter phone number">
+        </div>
 
-<label>Class / Year</label>
+        <div>
+            <label>School Logo</label>
+            <input type="file" id="schoolLogo" accept="image/*">
+            <img id="logoPreview" class="logo-preview">
+        </div>
 
-<select id="className"></select>
+    </div>
 
-<button onclick="createClass()">
-➕ Create Class
-</button>
+    <br>
 
-<label>Select Existing Class</label>
-
-<select id="classSelector" onchange="selectClass()">
-<option value="">-- Select Class --</option>
-</select>
-
-<div id="selectedClassMessage" class="message">
-No class selected.
+    <button onclick="saveSchoolProfile()">💾 Save School Profile</button>
 </div>
 
+<!-- LEVEL -->
+<div class="card">
+    <h2>🎓 Select Level</h2>
+
+    <select id="level" onchange="updateClassOptions()">
+        <option value="">-- Select Level --</option>
+        <option value="Primary">Primary</option>
+        <option value="O-Level">O-Level</option>
+        <option value="A-Level">A-Level</option>
+        <option value="University">University</option>
+    </select>
 </div>
 
+<!-- CREATE CLASS -->
+<div class="card">
+    <h2>🏫 Create Class</h2>
+
+    <div class="grid">
+
+        <div>
+            <label>Class / Year</label>
+            <select id="className">
+                <option value="">-- Select Class --</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Or enter custom class</label>
+            <input type="text" id="customClassName" placeholder="Example: Form 6A">
+        </div>
+
+    </div>
+
+    <br>
+
+    <button onclick="createClass()">➕ Create Class</button>
+</div>
+
+<!-- SELECT CLASS -->
+<div class="card">
+    <h2>📂 Select Existing Class</h2>
+
+    <select id="classSelector" onchange="selectClass()">
+        <option value="">-- Select Class --</option>
+    </select>
+</div>
 
 <!-- SUBJECTS -->
+<div class="card">
+    <h2>📚 Subjects</h2>
 
-<div class="card print-hide">
+    <div id="subjectsList"></div>
 
-<h2>📖 Subjects</h2>
-
-<div class="subject-row">
-
-<input
-type="text"
-id="subjectInput"
-placeholder="Enter subject name"
->
-
-<button onclick="addSubject()">
-➕ Add Subject
-</button>
-
+    <div class="grid">
+        <input type="text" id="subjectInput" placeholder="Enter subject name">
+        <button onclick="addSubject()">➕ Add Subject</button>
+    </div>
 </div>
-
-<div id="subjects" class="subjects"></div>
-
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div class="dashboard print-hide">
-
-<div class="stat">
-<h3>👨‍🎓 Students</h3>
-<p id="studentCount">0</p>
-</div>
-
-<div class="stat">
-<h3>📊 Class Average</h3>
-<p id="classAverage">0</p>
-</div>
-
-<div class="stat">
-<h3>🏆 Highest</h3>
-<p id="highest">0</p>
-</div>
-
-<div class="stat">
-<h3>📉 Lowest</h3>
-<p id="lowest">0</p>
-</div>
-
-</div>
-
 
 <!-- ADD STUDENT -->
+<div class="card">
+    <h2>👨‍🎓 Add Student</h2>
 
-<div class="card print-hide">
+    <input type="text" id="studentName" placeholder="Enter student name">
 
-<h2>👨‍🎓 Add Student</h2>
+    <div id="marksInputs"></div>
 
-<label>Student Name</label>
+    <br>
 
-<input
-type="text"
-id="studentName"
-placeholder="Enter student name"
->
-
-<h3>Enter Marks</h3>
-
-<div id="marksInputs" class="marks-grid"></div>
-
-<button onclick="addStudent()">
-➕ Add Student
-</button>
-
+    <button onclick="addStudent()">➕ Add Student</button>
 </div>
 
+<!-- DASHBOARD -->
+<div class="card">
+    <h2>📊 Class Dashboard</h2>
 
-<!-- EDIT STUDENT -->
+    <div class="stats">
 
-<div id="editSection" class="card print-hide">
+        <div class="stat">
+            <h3>Students</h3>
+            <p id="studentCount">0</p>
+        </div>
 
-<h2>✏️ Edit Student</h2>
+        <div class="stat">
+            <h3>Class Average</h3>
+            <p id="classAverage">0</p>
+        </div>
 
-<input type="hidden" id="editStudentId">
+        <div class="stat">
+            <h3>Highest</h3>
+            <p id="highestMark">0</p>
+        </div>
 
-<label>Student Name</label>
+        <div class="stat">
+            <h3>Lowest</h3>
+            <p id="lowestMark">0</p>
+        </div>
 
-<input
-type="text"
-id="editStudentName"
-placeholder="Student name"
->
-
-<h3>Edit Marks</h3>
-
-<div id="editMarksInputs" class="edit-grid"></div>
-
-<button onclick="updateStudent()">
-💾 Update Student
-</button>
-
-<button
-class="cancel-edit"
-onclick="cancelEdit()"
->
-Cancel
-</button>
-
+    </div>
 </div>
-
 
 <!-- SEARCH -->
+<div class="card">
+    <h2>🔎 Search Student</h2>
 
-<div class="card print-hide">
-
-<h2>🔎 Search Student</h2>
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search student..."
-oninput="searchStudent()"
->
-
+    <input type="text" id="searchStudent"
+           placeholder="Search student name..."
+           oninput="displayStudents()">
 </div>
 
+<!-- STUDENTS -->
+<div class="card">
+    <h2>👥 Students</h2>
 
-<!-- RESULTS -->
-
-<div class="card print-hide">
-
-<h2>📊 Student Results</h2>
-
-<div class="table-container">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Position</th>
-<th>Name</th>
-<th>Total</th>
-<th>Average</th>
-<th>Grade</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody id="studentTable"></tbody>
-
-</table>
-
+    <div id="studentsTable"></div>
 </div>
-
-</div>
-
 
 <!-- REPORT -->
+<div id="reportSection" class="card hidden">
 
-<div id="reportCard" class="card">
+    <div class="report-card">
 
-<div class="report-header">
+        <div class="report-header">
 
-<h1>STUDENT REPORT CARD</h1>
+            <img id="reportLogo">
 
-<p id="reportLevel"></p>
+            <h1 id="reportSchoolName">School Name</h1>
+            <p id="reportSchoolAddress"></p>
+            <p id="reportSchoolPhone"></p>
 
-</div>
+            <h2>📄 STUDENT REPORT CARD</h2>
 
-<div class="student-info">
+        </div>
 
-<div class="info-box">
-<strong>Student Name:</strong>
-<span id="reportName"></span>
-</div>
+        <div class="report-info">
+            <div><strong>Student:</strong> <span id="reportStudentName"></span></div>
+            <div><strong>Class:</strong> <span id="reportClass"></span></div>
+            <div><strong>Position:</strong> <span id="reportPosition"></span></div>
+            <div><strong>Overall Grade:</strong> <span id="reportGrade"></span></div>
+        </div>
 
-<div class="info-box">
-<strong>Class:</strong>
-<span id="reportClass"></span>
-</div>
+        <div id="reportSubjects"></div>
 
-<div class="info-box">
-<strong>Position:</strong>
-<span id="reportPosition"></span>
-</div>
+        <br>
 
-<div class="info-box">
-<strong>Overall Grade:</strong>
-<span id="reportGrade"></span>
-</div>
+        <div class="report-info">
+            <div><strong>Total:</strong> <span id="reportTotal"></span></div>
+            <div><strong>Average:</strong> <span id="reportAverage"></span></div>
+        </div>
 
-</div>
+        <button class="no-print" onclick="window.print()">🖨️ Print Report Card</button>
 
-<table>
+        <br><br>
 
-<thead>
+        <button class="btn-secondary no-print" onclick="closeReport()">✖ Close Report</button>
 
-<tr>
-<th>Subject</th>
-<th>Marks</th>
-<th>Grade</th>
-</tr>
-
-</thead>
-
-<tbody id="reportSubjects"></tbody>
-
-</table>
-
-<div class="summary">
-
-<div class="summary-box">
-Total
-<strong id="reportTotal">0</strong>
-</div>
-
-<div class="summary-box">
-Average
-<strong id="reportAverage">0</strong>
-</div>
-
-<div class="summary-box">
-Grade
-<strong id="reportOverallGrade">-</strong>
+    </div>
 </div>
 
 </div>
-
-<div class="print-hide">
-
-<button onclick="window.print()">
-🖨️ Print Report Card
-</button>
-
-<button
-class="close-report"
-onclick="closeReport()"
->
-Close Report
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 
 <script>
 
 let classes =
-JSON.parse(
-localStorage.getItem("smartMarkingClasses")
-) || [];
+    JSON.parse(localStorage.getItem("smartMarkingClasses")) || [];
 
 let selectedClassId =
-localStorage.getItem("selectedClassId") || "";
+    localStorage.getItem("selectedClassId") || "";
+
+let schoolProfile =
+    JSON.parse(localStorage.getItem("smartSchoolProfile")) || {
+        name:"",
+        address:"",
+        phone:"",
+        logo:""
+    };
 
 
-/* SAVE */
-
+// SAVE DATA
 function saveData(){
 
-localStorage.setItem(
-"smartMarkingClasses",
-JSON.stringify(classes)
-);
+    localStorage.setItem(
+        "smartMarkingClasses",
+        JSON.stringify(classes)
+    );
 
-localStorage.setItem(
-"selectedClassId",
-selectedClassId
-);
-
+    localStorage.setItem(
+        "selectedClassId",
+        selectedClassId
+    );
 }
 
 
-/* CLASS OPTIONS */
-
-function updateClassOptions(){
-
-const level =
-document.getElementById("level").value;
-
-const className =
-document.getElementById("className");
-
-className.innerHTML="";
-
-let options=[];
-
-if(level==="Primary"){
-
-options=[
-"Class 1",
-"Class 2",
-"Class 3",
-"Class 4",
-"Class 5",
-"Class 6",
-"Class 7"
-];
-
-}
-
-else if(level==="O-Level"){
-
-options=[
-"Form 1",
-"Form 2",
-"Form 3",
-"Form 4"
-];
-
-}
-
-else if(level==="A-Level"){
-
-options=[
-"Form 5",
-"Form 6"
-];
-
-}
-
-else{
-
-options=[
-"Year 1",
-"Year 2",
-"Year 3",
-"Year 4",
-"Year 5",
-"Year 6"
-];
-
-}
-
-options.forEach(option=>{
-
-const item =
-document.createElement("option");
-
-item.value=option;
-item.textContent=option;
-
-className.appendChild(item);
-
-});
-
-}
-
-
-/* CREATE CLASS */
-
-function createClass(){
-
-const level =
-document.getElementById("level").value;
-
-const className =
-document.getElementById("className").value;
-
-const exists =
-classes.some(
-c =>
-c.level===level &&
-c.className===className
-);
-
-if(exists){
-
-alert("This class already exists.");
-
-return;
-}
-
-const newClass={
-
-id:Date.now(),
-
-level:level,
-
-className:className,
-
-subjects:[],
-
-students:[]
-
-};
-
-classes.push(newClass);
-
-selectedClassId=newClass.id;
-
-saveData();
-
-updateClassSelector();
-
-displaySelectedClass();
-
-displaySubjects();
-
-createMarksInputs();
-
-displayStudents();
-
-updateDashboard();
-
-alert(
-level+
-" - "+
-className+
-" created successfully!"
-);
-
-}
-
-
-/* CLASS SELECTOR */
-
-function updateClassSelector(){
-
-const selector =
-document.getElementById("classSelector");
-
-selector.innerHTML =
-'<option value="">-- Select Class --</option>';
-
-classes.forEach(c=>{
-
-const option =
-document.createElement("option");
-
-option.value=c.id;
-
-option.textContent =
-c.level+
-" - "+
-c.className;
-
-selector.appendChild(option);
-
-});
-
-if(selectedClassId){
-
-selector.value=selectedClassId;
-
-}
-
-}
-
-
-/* SELECT CLASS */
-
-function selectClass(){
-
-const value =
-document.getElementById("classSelector").value;
-
-if(!value){
-
-selectedClassId="";
-
-saveData();
-
-displaySelectedClass();
-displaySubjects();
-createMarksInputs();
-displayStudents();
-updateDashboard();
-
-return;
-}
-
-selectedClassId=Number(value);
-
-saveData();
-
-const currentClass =
-getSelectedClass();
-
-if(currentClass){
-
-document.getElementById("level").value =
-currentClass.level;
-
-updateClassOptions();
-
-document.getElementById("className").value =
-currentClass.className;
-
-}
-
-displaySelectedClass();
-displaySubjects();
-createMarksInputs();
-displayStudents();
-updateDashboard();
-
-}
-
-
-/* GET CLASS */
-
+// GET SELECTED CLASS
 function getSelectedClass(){
 
-return classes.find(
-c =>
-c.id===Number(selectedClassId)
+    return classes.find(c => c.id === selectedClassId);
+
+}
+
+
+// SCHOOL PROFILE
+function saveSchoolProfile(){
+
+    schoolProfile.name =
+        document.getElementById("schoolName").value.trim();
+
+    schoolProfile.address =
+        document.getElementById("schoolAddress").value.trim();
+
+    schoolProfile.phone =
+        document.getElementById("schoolPhone").value.trim();
+
+    localStorage.setItem(
+        "smartSchoolProfile",
+        JSON.stringify(schoolProfile)
+    );
+
+    updateSchoolProfileDisplay();
+
+    alert("School profile saved successfully!");
+}
+
+
+// LOGO
+document.getElementById("schoolLogo").addEventListener(
+    "change",
+    function(){
+
+        const file = this.files[0];
+
+        if(!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            schoolProfile.logo = e.target.result;
+
+            localStorage.setItem(
+                "smartSchoolProfile",
+                JSON.stringify(schoolProfile)
+            );
+
+            updateSchoolProfileDisplay();
+
+        };
+
+        reader.readAsDataURL(file);
+    }
 );
 
+
+// UPDATE SCHOOL DISPLAY
+function updateSchoolProfileDisplay(){
+
+    const name =
+        schoolProfile.name || "Smart Marking System";
+
+    document.getElementById("headerSchoolName").textContent =
+        "📚 " + name;
+
+    document.getElementById("schoolName").value =
+        schoolProfile.name || "";
+
+    document.getElementById("schoolAddress").value =
+        schoolProfile.address || "";
+
+    document.getElementById("schoolPhone").value =
+        schoolProfile.phone || "";
+
+
+    const preview =
+        document.getElementById("logoPreview");
+
+    if(schoolProfile.logo){
+
+        preview.src = schoolProfile.logo;
+        preview.style.display = "block";
+
+    }else{
+
+        preview.style.display = "none";
+
+    }
+
 }
 
 
-/* DISPLAY CLASS */
+// UPDATE CLASS OPTIONS
+function updateClassOptions(){
 
-function displaySelectedClass(){
+    const level =
+        document.getElementById("level").value;
 
-const message =
-document.getElementById(
-"selectedClassMessage"
-);
+    const className =
+        document.getElementById("className");
 
-const currentClass =
-getSelectedClass();
+    className.innerHTML =
+        '<option value="">-- Select Class --</option>';
 
-if(!currentClass){
+    let options = [];
 
-message.textContent =
-"No class selected.";
+    if(level === "Primary"){
 
-return;
+        options = [
+            "Class 1",
+            "Class 2",
+            "Class 3",
+            "Class 4",
+            "Class 5",
+            "Class 6",
+            "Class 7"
+        ];
+
+    }
+
+    else if(level === "O-Level"){
+
+        options = [
+            "Form 1",
+            "Form 2",
+            "Form 3",
+            "Form 4"
+        ];
+
+    }
+
+    else if(level === "A-Level"){
+
+        options = [
+            "Form 5",
+            "Form 6"
+        ];
+
+    }
+
+    else if(level === "University"){
+
+        options = [
+            "Year 1",
+            "Year 2",
+            "Year 3",
+            "Year 4",
+            "Year 5",
+            "Year 6"
+        ];
+
+    }
+
+    options.forEach(option => {
+
+        const opt =
+            document.createElement("option");
+
+        opt.value = option;
+        opt.textContent = option;
+
+        className.appendChild(opt);
+
+    });
+
 }
 
-message.textContent =
-"Selected: "+
-currentClass.level+
-" - "+
-currentClass.className;
+
+// CREATE CLASS
+function createClass(){
+
+    const level =
+        document.getElementById("level").value;
+
+    let className =
+        document.getElementById("className").value;
+
+    const custom =
+        document.getElementById("customClassName").value.trim();
+
+    if(custom){
+        className = custom;
+    }
+
+    if(!level){
+
+        alert("Please select level.");
+        return;
+
+    }
+
+    if(!className){
+
+        alert("Please select or enter class.");
+        return;
+
+    }
+
+    const newClass = {
+
+        id: Date.now().toString(),
+
+        level: level,
+
+        className: className,
+
+        subjects: [],
+
+        students: []
+
+    };
+
+    classes.push(newClass);
+
+    selectedClassId = newClass.id;
+
+    saveData();
+
+    updateClassSelector();
+
+    refreshUI();
+
+    alert("Class created successfully!");
 
 }
 
 
-/* ADD SUBJECT */
+// CLASS SELECTOR
+function updateClassSelector(){
 
+    const selector =
+        document.getElementById("classSelector");
+
+    selector.innerHTML =
+        '<option value="">-- Select Class --</option>';
+
+    classes.forEach(c => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = c.id;
+
+        option.textContent =
+            c.level + " - " + c.className;
+
+        selector.appendChild(option);
+
+    });
+
+    selector.value = selectedClassId;
+
+}
+
+
+// SELECT CLASS
+function selectClass(){
+
+    selectedClassId =
+        document.getElementById("classSelector").value;
+
+    saveData();
+
+    refreshUI();
+
+}
+
+
+// ADD SUBJECT
 function addSubject(){
 
-const currentClass =
-getSelectedClass();
+    const currentClass =
+        getSelectedClass();
 
-if(!currentClass){
+    if(!currentClass){
 
-alert(
-"Please create or select a class first."
-);
+        alert("Please select a class first.");
+        return;
 
-return;
-}
+    }
 
-const input =
-document.getElementById(
-"subjectInput"
-);
+    if(currentClass.students.length > 0){
 
-const subject =
-input.value.trim();
+        alert("You cannot change subjects after adding students.");
+        return;
 
-if(!subject){
+    }
 
-alert("Enter a subject name.");
+    const input =
+        document.getElementById("subjectInput");
 
-return;
-}
+    const subject =
+        input.value.trim();
 
-const exists =
-currentClass.subjects.some(
-s =>
-s.toLowerCase()===
-subject.toLowerCase()
-);
+    if(!subject){
 
-if(exists){
+        alert("Enter subject name.");
+        return;
 
-alert(
-"This subject already exists."
-);
+    }
 
-return;
-}
+    if(currentClass.subjects.includes(subject)){
 
-currentClass.subjects.push(subject);
+        alert("Subject already exists.");
+        return;
 
-input.value="";
+    }
 
-saveData();
+    currentClass.subjects.push(subject);
 
-displaySubjects();
+    input.value = "";
 
-createMarksInputs();
+    saveData();
+
+    refreshUI();
 
 }
 
 
-/* DISPLAY SUBJECTS */
-
+// DISPLAY SUBJECTS
 function displaySubjects(){
 
-const container =
-document.getElementById("subjects");
+    const currentClass =
+        getSelectedClass();
 
-container.innerHTML="";
+    const container =
+        document.getElementById("subjectsList");
 
-const currentClass =
-getSelectedClass();
+    container.innerHTML = "";
 
-if(!currentClass)return;
+    if(!currentClass){
 
-if(currentClass.subjects.length===0){
+        container.innerHTML =
+            '<div class="empty">Select a class first.</div>';
 
-container.innerHTML =
-'<div class="empty">No subjects added yet.</div>';
+        return;
 
-return;
+    }
+
+    if(currentClass.subjects.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">No subjects added yet.</div>';
+
+        createMarksInputs();
+
+        return;
+
+    }
+
+    currentClass.subjects.forEach((subject,index) => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "subject-item";
+
+        div.innerHTML = `
+            <input type="text" value="${subject}" disabled>
+            <button class="btn-danger"
+                onclick="removeSubject(${index})">
+                🗑️
+            </button>
+        `;
+
+        container.appendChild(div);
+
+    });
+
+    createMarksInputs();
 
 }
 
-currentClass.subjects.forEach(
-(subject,index)=>{
 
-const div =
-document.createElement("div");
-
-div.className="subject";
-
-div.innerHTML=`
-
-<span>${subject}</span>
-
-<button
-onclick="removeSubject(${index})"
->
-×
-</button>
-
-`;
-
-container.appendChild(div);
-
-});
-
-}
-
-
-/* REMOVE SUBJECT */
-
+// REMOVE SUBJECT
 function removeSubject(index){
 
-const currentClass =
-getSelectedClass();
+    const currentClass =
+        getSelectedClass();
 
-if(!currentClass)return;
+    if(!currentClass) return;
 
-if(currentClass.students.length>0){
+    if(currentClass.students.length > 0){
 
-alert(
-"You cannot remove subjects after students have been added."
-);
+        alert("You cannot delete subjects after adding students.");
+        return;
 
-return;
-}
+    }
 
-currentClass.subjects.splice(index,1);
+    currentClass.subjects.splice(index,1);
 
-saveData();
+    saveData();
 
-displaySubjects();
-
-createMarksInputs();
+    refreshUI();
 
 }
 
 
-/* MARK INPUTS */
-
+// CREATE MARK INPUTS
 function createMarksInputs(){
 
-const container =
-document.getElementById(
-"marksInputs"
-);
+    const currentClass =
+        getSelectedClass();
 
-container.innerHTML="";
+    const container =
+        document.getElementById("marksInputs");
 
-const currentClass =
-getSelectedClass();
+    container.innerHTML = "";
 
-if(!currentClass)return;
+    if(!currentClass) return;
 
-if(currentClass.subjects.length===0){
+    currentClass.subjects.forEach(subject => {
 
-container.innerHTML =
-'<div class="empty">Add subjects first.</div>';
+        const div =
+            document.createElement("div");
 
-return;
+        div.innerHTML = `
+            <label>${subject}</label>
+            <input
+                type="number"
+                min="0"
+                max="100"
+                class="mark-input"
+                data-subject="${subject}"
+                placeholder="Enter mark 0 - 100"
+            >
+        `;
 
-}
+        container.appendChild(div);
 
-currentClass.subjects.forEach(
-subject=>{
-
-const wrapper =
-document.createElement("div");
-
-wrapper.innerHTML=`
-
-<label>${subject}</label>
-
-<input
-type="number"
-class="subject-mark"
-data-subject="${subject}"
-min="0"
-max="100"
-placeholder="0 - 100"
->
-
-`;
-
-container.appendChild(wrapper);
-
-});
+    });
 
 }
 
 
-/* GRADE */
+// GRADE
+function getGrade(average){
 
-function getGrade(mark){
+    if(average >= 80) return "A";
 
-if(mark>=80)return"A";
-if(mark>=70)return"B";
-if(mark>=60)return"C";
-if(mark>=50)return"D";
+    if(average >= 70) return "B";
 
-return"F";
+    if(average >= 60) return "C";
+
+    if(average >= 50) return "D";
+
+    return "F";
 
 }
 
 
-/* ADD STUDENT */
-
+// ADD STUDENT
 function addStudent(){
 
-const currentClass =
-getSelectedClass();
+    const currentClass =
+        getSelectedClass();
 
-if(!currentClass){
+    if(!currentClass){
 
-alert(
-"Please create or select a class first."
-);
+        alert("Please select a class first.");
+        return;
 
-return;
-}
+    }
 
-if(currentClass.subjects.length===0){
+    if(currentClass.subjects.length === 0){
 
-alert(
-"Please add subjects first."
-);
+        alert("Please add subjects first.");
+        return;
 
-return;
-}
+    }
 
-const name =
-document.getElementById(
-"studentName"
-).value.trim();
+    const name =
+        document.getElementById("studentName").value.trim();
 
-if(!name){
+    if(!name){
 
-alert("Enter student name.");
+        alert("Enter student name.");
+        return;
 
-return;
-}
+    }
 
-const inputs =
-document.querySelectorAll(
-".subject-mark"
-);
+    const inputs =
+        document.querySelectorAll(".mark-input");
 
-let marks={};
+    let marks = {};
+    let total = 0;
 
-let total=0;
+    for(const input of inputs){
 
-for(let input of inputs){
+        const mark = Number(input.value);
 
-const value =
-Number(input.value);
+        if(
+            input.value === "" ||
+            mark < 0 ||
+            mark > 100
+        ){
 
-if(
-input.value==="" ||
-value<0 ||
-value>100
-){
+            alert("All marks must be between 0 and 100.");
+            return;
 
-alert(
-"Enter valid marks from 0 to 100 for every subject."
-);
+        }
 
-return;
-}
+        const subject =
+            input.dataset.subject;
 
-const subject =
-input.dataset.subject;
+        marks[subject] = mark;
 
-marks[subject]=value;
+        total += mark;
 
-total+=value;
+    }
 
-}
+    const average =
+        total / currentClass.subjects.length;
 
-const average =
-total/
-currentClass.subjects.length;
+    const student = {
 
-const student={
+        id: Date.now().toString(),
 
-id:Date.now(),
+        name: name,
 
-name:name,
+        marks: marks,
 
-marks:marks,
+        total: total,
 
-total:total,
+        average: Number(average.toFixed(2)),
 
-average:average,
+        grade: getGrade(average)
 
-grade:getGrade(average)
+    };
 
-};
+    currentClass.students.push(student);
 
-currentClass.students.push(student);
+    document.getElementById("studentName").value = "";
 
-saveData();
+    saveData();
 
-document.getElementById(
-"studentName"
-).value="";
+    refreshUI();
 
-inputs.forEach(
-input=>input.value=""
-);
-
-displayStudents();
-
-updateDashboard();
+    alert("Student added successfully!");
 
 }
 
 
-/* DISPLAY STUDENTS */
+// DISPLAY STUDENTS
+function displayStudents(){
 
-function displayStudents(list=null){
+    const currentClass =
+        getSelectedClass();
 
-const currentClass =
-getSelectedClass();
+    const container =
+        document.getElementById("studentsTable");
 
-const table =
-document.getElementById(
-"studentTable"
-);
+    container.innerHTML = "";
 
-table.innerHTML="";
+    if(!currentClass){
 
-if(!currentClass)return;
+        container.innerHTML =
+            '<div class="empty">Select a class first.</div>';
 
-let students =
-list || currentClass.students;
+        updateDashboard();
 
-students =
-[...students].sort(
-(a,b)=>
-b.average-a.average
-);
+        return;
 
-if(students.length===0){
+    }
 
-table.innerHTML=`
-<tr>
-<td colspan="6" class="empty">
-No students found.
-</td>
-</tr>
-`;
+    let students =
+        [...currentClass.students];
 
-return;
+    const search =
+        document.getElementById("searchStudent")
+        .value
+        .toLowerCase()
+        .trim();
 
-}
+    if(search){
 
-students.forEach(
-(student,index)=>{
+        students =
+            students.filter(student =>
+                student.name.toLowerCase().includes(search)
+            );
 
-const row =
-document.createElement("tr");
+    }
 
-row.innerHTML=`
+    students.sort(
+        (a,b) => b.average - a.average
+    );
 
-<td>${index+1}</td>
+    if(students.length === 0){
 
-<td>${student.name}</td>
+        container.innerHTML =
+            '<div class="empty">No students found.</div>';
 
-<td>${student.total}</td>
+        updateDashboard();
 
-<td>${student.average.toFixed(2)}</td>
+        return;
 
-<td>${student.grade}</td>
+    }
 
-<td>
+    let html = `
+        <div class="table-container">
+        <table>
 
-<button
-class="action-btn edit-btn"
-onclick="editStudent(${student.id})"
->
-✏️ Edit
-</button>
+        <thead>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Total</th>
+            <th>Average</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
 
-<button
-class="action-btn report-btn"
-onclick="showReport(${student.id})"
->
-📄 Report
-</button>
+        <tbody>
+    `;
 
-<button
-class="action-btn delete-btn"
-onclick="deleteStudent(${student.id})"
->
-🗑️ Delete
-</button>
+    students.forEach((student,index) => {
 
-</td>
+        html += `
+            <tr>
 
-`;
+                <td>${index + 1}</td>
 
-table.appendChild(row);
+                <td>${student.name}</td>
 
-});
+                <td>${student.total}</td>
 
-}
+                <td>${student.average}</td>
 
+                <td>${student.grade}</td>
 
-/* EDIT STUDENT */
+                <td>
+                    <div class="action-buttons">
 
-function editStudent(id){
+                        <button
+                            onclick="editStudent('${student.id}')">
+                            ✏️ Edit
+                        </button>
 
-const currentClass =
-getSelectedClass();
+                        <button
+                            onclick="showReport('${student.id}')">
+                            📄 Report
+                        </button>
 
-if(!currentClass)return;
+                        <button
+                            class="btn-danger"
+                            onclick="deleteStudent('${student.id}')">
+                            🗑️ Delete
+                        </button>
 
-const student =
-currentClass.students.find(
-s=>s.id===id
-);
+                    </div>
+                </td>
 
-if(!student)return;
+            </tr>
+        `;
 
-document.getElementById(
-"editStudentId"
-).value=id;
+    });
 
-document.getElementById(
-"editStudentName"
-).value=student.name;
+    html += `
+        </tbody>
+        </table>
+        </div>
+    `;
 
-const container =
-document.getElementById(
-"editMarksInputs"
-);
+    container.innerHTML = html;
 
-container.innerHTML="";
-
-currentClass.subjects.forEach(
-subject=>{
-
-const wrapper =
-document.createElement("div");
-
-wrapper.innerHTML=`
-
-<label>${subject}</label>
-
-<input
-type="number"
-class="edit-mark"
-data-subject="${subject}"
-min="0"
-max="100"
-value="${student.marks[subject]}"
->
-
-`;
-
-container.appendChild(wrapper);
-
-});
-
-document.getElementById(
-"editSection"
-).style.display="block";
-
-window.scrollTo({
-
-top:
-document.getElementById(
-"editSection"
-).offsetTop,
-
-behavior:"smooth"
-
-});
+    updateDashboard();
 
 }
 
 
-/* UPDATE STUDENT */
-
-function updateStudent(){
-
-const currentClass =
-getSelectedClass();
-
-if(!currentClass)return;
-
-const id =
-Number(
-document.getElementById(
-"editStudentId"
-).value
-);
-
-const student =
-currentClass.students.find(
-s=>s.id===id
-);
-
-if(!student)return;
-
-const name =
-document.getElementById(
-"editStudentName"
-).value.trim();
-
-if(!name){
-
-alert("Enter student name.");
-
-return;
-}
-
-const inputs =
-document.querySelectorAll(
-".edit-mark"
-);
-
-let marks={};
-
-let total=0;
-
-for(let input of inputs){
-
-const value =
-Number(input.value);
-
-if(
-input.value==="" ||
-value<0 ||
-value>100
-){
-
-alert(
-"Enter valid marks from 0 to 100."
-);
-
-return;
-}
-
-const subject =
-input.dataset.subject;
-
-marks[subject]=value;
-
-total+=value;
-
-}
-
-const average =
-total/
-currentClass.subjects.length;
-
-student.name=name;
-
-student.marks=marks;
-
-student.total=total;
-
-student.average=average;
-
-student.grade=getGrade(average);
-
-saveData();
-
-cancelEdit();
-
-displayStudents();
-
-updateDashboard();
-
-alert(
-"Student updated successfully!"
-);
-
-}
-
-
-/* CANCEL EDIT */
-
-function cancelEdit(){
-
-document.getElementById(
-"editSection"
-).style.display="none";
-
-}
-
-
-/* DELETE */
-
+// DELETE STUDENT
 function deleteStudent(id){
 
-const currentClass =
-getSelectedClass();
+    const currentClass =
+        getSelectedClass();
 
-if(!currentClass)return;
+    if(!currentClass) return;
 
-if(!confirm(
-"Delete this student?"
-))return;
+    const student =
+        currentClass.students.find(s => s.id === id);
 
-currentClass.students =
-currentClass.students.filter(
-student =>
-student.id!==id
-);
+    if(!student) return;
 
-saveData();
+    if(!confirm(
+        "Delete " + student.name + "?"
+    )) return;
 
-displayStudents();
+    currentClass.students =
+        currentClass.students.filter(
+            s => s.id !== id
+        );
 
-updateDashboard();
+    saveData();
 
-}
-
-
-/* SEARCH */
-
-function searchStudent(){
-
-const currentClass =
-getSelectedClass();
-
-if(!currentClass)return;
-
-const query =
-document.getElementById(
-"searchInput"
-).value.toLowerCase();
-
-const results =
-currentClass.students.filter(
-student =>
-student.name
-.toLowerCase()
-.includes(query)
-);
-
-displayStudents(results);
+    refreshUI();
 
 }
 
 
-/* DASHBOARD */
+// EDIT STUDENT
+function editStudent(id){
 
-function updateDashboard(){
+    const currentClass =
+        getSelectedClass();
 
-const currentClass =
-getSelectedClass();
+    const student =
+        currentClass.students.find(
+            s => s.id === id
+        );
 
-if(!currentClass){
+    if(!student) return;
 
-document.getElementById(
-"studentCount"
-).textContent="0";
+    const newName =
+        prompt(
+            "Enter student name:",
+            student.name
+        );
 
-document.getElementById(
-"classAverage"
-).textContent="0";
+    if(newName === null) return;
 
-document.getElementById(
-"highest"
-).textContent="0";
+    const trimmedName =
+        newName.trim();
 
-document.getElementById(
-"lowest"
-).textContent="0";
+    if(!trimmedName){
 
-return;
+        alert("Student name cannot be empty.");
+        return;
+
+    }
+
+    student.name = trimmedName;
+
+    for(const subject of currentClass.subjects){
+
+        const oldMark =
+            student.marks[subject];
+
+        const value =
+            prompt(
+                subject + " mark (0-100):",
+                oldMark
+            );
+
+        if(value === null) return;
+
+        const mark = Number(value);
+
+        if(
+            value === "" ||
+            isNaN(mark) ||
+            mark < 0 ||
+            mark > 100
+        ){
+
+            alert("Invalid mark.");
+            return;
+
+        }
+
+        student.marks[subject] = mark;
+
+    }
+
+    let total = 0;
+
+    currentClass.subjects.forEach(subject => {
+
+        total += Number(
+            student.marks[subject]
+        );
+
+    });
+
+    student.total = total;
+
+    student.average =
+        Number(
+            (total / currentClass.subjects.length)
+            .toFixed(2)
+        );
+
+    student.grade =
+        getGrade(student.average);
+
+    saveData();
+
+    refreshUI();
+
 }
 
-const students =
-currentClass.students;
 
-document.getElementById(
-"studentCount"
-).textContent=
-students.length;
-
-if(students.length===0){
-
-document.getElementById(
-"classAverage"
-).textContent="0";
-
-document.getElementById(
-"highest"
-).textContent="0";
-
-document.getElementById(
-"lowest"
-).textContent="0";
-
-return;
-}
-
-const averages =
-students.map(
-student=>student.average
-);
-
-const classAverage =
-averages.reduce(
-(sum,value)=>
-sum+value,
-0
-)/
-averages.length;
-
-document.getElementById(
-"classAverage"
-).textContent=
-classAverage.toFixed(2);
-
-document.getElementById(
-"highest"
-).textContent=
-Math.max(...averages)
-.toFixed(2);
-
-document.getElementById(
-"lowest"
-).textContent=
-Math.min(...averages)
-.toFixed(2);
-
-}
-
-
-/* REPORT */
-
+// REPORT
 function showReport(studentId){
 
-const currentClass =
-getSelectedClass();
+    const currentClass =
+        getSelectedClass();
 
-if(!currentClass)return;
+    const student =
+        currentClass.students.find(
+            s => s.id === studentId
+        );
 
-const student =
-currentClass.students.find(
-s=>s.id===studentId
-);
+    if(!student) return;
 
-if(!student)return;
+    const sorted =
+        [...currentClass.students]
+        .sort(
+            (a,b) => b.average - a.average
+        );
 
-const sortedStudents =
-[...currentClass.students].sort(
-(a,b)=>
-b.average-a.average
-);
+    const position =
+        sorted.findIndex(
+            s => s.id === student.id
+        ) + 1;
 
-const position =
-sortedStudents.findIndex(
-s=>s.id===studentId
-)+1;
 
-document.getElementById(
-"reportName"
-).textContent=
-student.name;
+    document.getElementById("reportStudentName")
+        .textContent = student.name;
 
-document.getElementById(
-"reportClass"
-).textContent=
-currentClass.className;
+    document.getElementById("reportClass")
+        .textContent =
+            currentClass.level +
+            " - " +
+            currentClass.className;
 
-document.getElementById(
-"reportLevel"
-).textContent=
-currentClass.level+
-" - "+
-currentClass.className;
+    document.getElementById("reportPosition")
+        .textContent = position;
 
-document.getElementById(
-"reportPosition"
-).textContent=
-position;
+    document.getElementById("reportGrade")
+        .textContent = student.grade;
 
-document.getElementById(
-"reportGrade"
-).textContent=
-student.grade;
+    document.getElementById("reportTotal")
+        .textContent = student.total;
 
-document.getElementById(
-"reportTotal"
-).textContent=
-student.total;
+    document.getElementById("reportAverage")
+        .textContent = student.average;
 
-document.getElementById(
-"reportAverage"
-).textContent=
-student.average.toFixed(2);
 
-document.getElementById(
-"reportOverallGrade"
-).textContent=
-student.grade;
+    document.getElementById("reportSchoolName")
+        .textContent =
+            schoolProfile.name ||
+            "Smart Marking System";
 
-const table =
-document.getElementById(
-"reportSubjects"
-);
+    document.getElementById("reportSchoolAddress")
+        .textContent =
+            schoolProfile.address || "";
 
-table.innerHTML="";
+    document.getElementById("reportSchoolPhone")
+        .textContent =
+            schoolProfile.phone || "";
 
-currentClass.subjects.forEach(
-subject=>{
 
-const mark =
-student.marks[subject];
+    const logo =
+        document.getElementById("reportLogo");
 
-const row =
-document.createElement("tr");
+    if(schoolProfile.logo){
 
-row.innerHTML=`
+        logo.src = schoolProfile.logo;
+        logo.style.display = "block";
 
-<td>${subject}</td>
+    }else{
 
-<td>${mark}</td>
+        logo.style.display = "none";
 
-<td>${getGrade(mark)}</td>
+    }
 
-`;
 
-table.appendChild(row);
+    let html = `
+        <div class="table-container">
+        <table>
 
-});
+        <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Mark</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
 
-document.getElementById(
-"reportCard"
-).style.display="block";
+        <tbody>
+    `;
 
-window.scrollTo({
+    currentClass.subjects.forEach(subject => {
 
-top:
-document.getElementById(
-"reportCard"
-).offsetTop,
+        const mark =
+            student.marks[subject];
 
-behavior:"smooth"
+        html += `
+            <tr>
+                <td>${subject}</td>
+                <td>${mark}</td>
+                <td>${getGrade(mark)}</td>
+            </tr>
+        `;
 
-});
+    });
+
+    html += `
+        </tbody>
+        </table>
+        </div>
+    `;
+
+    document.getElementById("reportSubjects")
+        .innerHTML = html;
+
+    document.getElementById("reportSection")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top:document.getElementById("reportSection").offsetTop,
+        behavior:"smooth"
+    });
 
 }
 
 
-/* CLOSE REPORT */
-
+// CLOSE REPORT
 function closeReport(){
 
-document.getElementById(
-"reportCard"
-).style.display="none";
+    document.getElementById("reportSection")
+        .classList.add("hidden");
 
 }
 
 
-/* START */
+// DASHBOARD
+function updateDashboard(){
 
-updateClassOptions();
+    const currentClass =
+        getSelectedClass();
+
+    if(!currentClass){
+
+        document.getElementById("studentCount")
+            .textContent = "0";
+
+        document.getElementById("classAverage")
+            .textContent = "0";
+
+        document.getElementById("highestMark")
+            .textContent = "0";
+
+        document.getElementById("lowestMark")
+            .textContent = "0";
+
+        return;
+
+    }
+
+    const students =
+        currentClass.students;
+
+    document.getElementById("studentCount")
+        .textContent = students.length;
+
+    if(students.length === 0){
+
+        document.getElementById("classAverage")
+            .textContent = "0";
+
+        document.getElementById("highestMark")
+            .textContent = "0";
+
+        document.getElementById("lowestMark")
+            .textContent = "0";
+
+        return;
+
+    }
+
+    const averages =
+        students.map(s => s.average);
+
+    const classAverage =
+        averages.reduce(
+            (a,b) => a+b,
+            0
+        ) / averages.length;
+
+    document.getElementById("classAverage")
+        .textContent =
+            classAverage.toFixed(2);
+
+    document.getElementById("highestMark")
+        .textContent =
+            Math.max(...averages).toFixed(2);
+
+    document.getElementById("lowestMark")
+        .textContent =
+            Math.min(...averages).toFixed(2);
+
+}
+
+
+// REFRESH UI
+function refreshUI(){
+
+    updateClassSelector();
+
+    displaySubjects();
+
+    displayStudents();
+
+    updateDashboard();
+
+}
+
+
+// INITIALIZE
+updateSchoolProfileDisplay();
 
 updateClassSelector();
 
-if(selectedClassId){
-
-const currentClass =
-getSelectedClass();
-
-if(currentClass){
-
-document.getElementById(
-"level"
-).value=
-currentClass.level;
-
-updateClassOptions();
-
-document.getElementById(
-"className"
-).value=
-currentClass.className;
-
-}
-
-}
-
-displaySelectedClass();
-
-displaySubjects();
-
-createMarksInputs();
-
-displayStudents();
-
-updateDashboard();
+refreshUI();
 
 </script>
 
