@@ -1,0 +1,1783 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Marking System</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:#f4f6f8;
+    color:#222;
+}
+
+header{
+    background:#1f4e78;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:20px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+h2{
+    margin-top:0;
+    color:#1f4e78;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input,select,button{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+button{
+    background:#1f4e78;
+    color:white;
+    border:none;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button:hover{
+    background:#163a5a;
+}
+
+.subject-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.subject-row input{
+    flex:1;
+}
+
+.subject-row button{
+    width:150px;
+}
+
+.subjects{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.subject{
+    background:#e8f1f8;
+    padding:8px 12px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.subject button{
+    width:auto;
+    margin:0;
+    padding:3px 8px;
+    background:#c0392b;
+    border-radius:50%;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.stat h3{
+    margin:0;
+    color:#666;
+}
+
+.stat p{
+    font-size:25px;
+    font-weight:bold;
+    color:#1f4e78;
+    margin:10px 0 0;
+}
+
+.marks-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#1f4e78;
+    color:white;
+}
+
+.action-btn{
+    width:auto;
+    padding:7px 10px;
+    margin:2px;
+}
+
+.edit-btn{
+    background:#f39c12;
+}
+
+.report-btn{
+    background:#27ae60;
+}
+
+.delete-btn{
+    background:#c0392b;
+}
+
+.message{
+    padding:10px;
+    background:#fff3cd;
+    border-radius:6px;
+    margin-top:10px;
+}
+
+
+/* EDIT */
+
+#editSection{
+    display:none;
+    border-left:5px solid #f39c12;
+}
+
+.edit-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+
+/* REPORT */
+
+#reportCard{
+    display:none;
+}
+
+.report-header{
+    text-align:center;
+    border-bottom:2px solid #1f4e78;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.report-header h1{
+    color:#1f4e78;
+}
+
+.student-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.info-box{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.summary-box{
+    border:1px solid #ddd;
+    padding:15px;
+    text-align:center;
+}
+
+.summary-box strong{
+    display:block;
+    font-size:20px;
+    margin-top:5px;
+    color:#1f4e78;
+}
+
+.close-report{
+    background:#555;
+}
+
+.cancel-edit{
+    background:#555;
+}
+
+
+/* PRINT */
+
+@media print{
+
+    body *{
+        visibility:hidden;
+    }
+
+    #reportCard,
+    #reportCard *{
+        visibility:visible;
+    }
+
+    #reportCard{
+        display:block;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        padding:30px;
+        box-shadow:none;
+    }
+
+    .print-hide{
+        display:none!important;
+    }
+}
+
+
+@media(max-width:700px){
+
+    .dashboard{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .marks-grid,
+    .edit-grid{
+        grid-template-columns:1fr;
+    }
+
+    .subject-row{
+        flex-direction:column;
+    }
+
+    .subject-row button{
+        width:100%;
+    }
+
+    .student-info,
+    .summary{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Smart Marking System</h1>
+    <p>Primary → O-Level → A-Level → University</p>
+</header>
+
+<div class="container">
+
+<!-- CLASS -->
+
+<div class="card print-hide">
+
+<h2>🏫 Create / Select Class</h2>
+
+<label>Education Level</label>
+
+<select id="level" onchange="updateClassOptions()">
+<option value="Primary">Primary</option>
+<option value="O-Level">O-Level</option>
+<option value="A-Level">A-Level</option>
+<option value="University">University</option>
+</select>
+
+<label>Class / Year</label>
+
+<select id="className"></select>
+
+<button onclick="createClass()">
+Create Class
+</button>
+
+<label>Select Existing Class</label>
+
+<select id="classSelector" onchange="selectClass()">
+<option value="">-- Select Class --</option>
+</select>
+
+<div id="selectedClassMessage" class="message">
+No class selected.
+</div>
+
+</div>
+
+
+<!-- SUBJECTS -->
+
+<div class="card print-hide">
+
+<h2>📖 Subjects</h2>
+
+<div class="subject-row">
+
+<input
+type="text"
+id="subjectInput"
+placeholder="Enter subject name"
+>
+
+<button onclick="addSubject()">
+Add Subject
+</button>
+
+</div>
+
+<div id="subjects" class="subjects"></div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard print-hide">
+
+<div class="stat">
+<h3>Students</h3>
+<p id="studentCount">0</p>
+</div>
+
+<div class="stat">
+<h3>Class Average</h3>
+<p id="classAverage">0</p>
+</div>
+
+<div class="stat">
+<h3>Highest</h3>
+<p id="highest">0</p>
+</div>
+
+<div class="stat">
+<h3>Lowest</h3>
+<p id="lowest">0</p>
+</div>
+
+</div>
+
+
+<!-- ADD STUDENT -->
+
+<div class="card print-hide">
+
+<h2>👨‍🎓 Add Student</h2>
+
+<label>Student Name</label>
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter student name"
+>
+
+<h3>Enter Marks</h3>
+
+<div id="marksInputs" class="marks-grid"></div>
+
+<button onclick="addStudent()">
+Add Student
+</button>
+
+</div>
+
+
+<!-- EDIT STUDENT -->
+
+<div id="editSection" class="card print-hide">
+
+<h2>✏️ Edit Student</h2>
+
+<input type="hidden" id="editStudentId">
+
+<label>Student Name</label>
+
+<input
+type="text"
+id="editStudentName"
+placeholder="Student name"
+>
+
+<h3>Edit Marks</h3>
+
+<div id="editMarksInputs" class="edit-grid"></div>
+
+<button onclick="updateStudent()">
+Update Student
+</button>
+
+<button
+class="cancel-edit"
+onclick="cancelEdit()"
+>
+Cancel
+</button>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="card print-hide">
+
+<h2>🔎 Search Student</h2>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search student..."
+oninput="searchStudent()"
+>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="card print-hide">
+
+<h2>📊 Student Results</h2>
+
+<div style="overflow-x:auto;">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Position</th>
+<th>Name</th>
+<th>Total</th>
+<th>Average</th>
+<th>Grade</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="studentTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- REPORT -->
+
+<div id="reportCard" class="card">
+
+<div class="report-header">
+
+<h1>STUDENT REPORT CARD</h1>
+
+<p id="reportLevel"></p>
+
+</div>
+
+<div class="student-info">
+
+<div class="info-box">
+<strong>Student Name:</strong>
+<span id="reportName"></span>
+</div>
+
+<div class="info-box">
+<strong>Class:</strong>
+<span id="reportClass"></span>
+</div>
+
+<div class="info-box">
+<strong>Position:</strong>
+<span id="reportPosition"></span>
+</div>
+
+<div class="info-box">
+<strong>Overall Grade:</strong>
+<span id="reportGrade"></span>
+</div>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Subject</th>
+<th>Marks</th>
+<th>Grade</th>
+</tr>
+
+</thead>
+
+<tbody id="reportSubjects"></tbody>
+
+</table>
+
+<div class="summary">
+
+<div class="summary-box">
+Total
+<strong id="reportTotal">0</strong>
+</div>
+
+<div class="summary-box">
+Average
+<strong id="reportAverage">0</strong>
+</div>
+
+<div class="summary-box">
+Grade
+<strong id="reportOverallGrade">-</strong>
+</div>
+
+</div>
+
+<div class="print-hide">
+
+<button onclick="window.print()">
+🖨️ Print Report Card
+</button>
+
+<button
+class="close-report"
+onclick="closeReport()"
+>
+Close Report
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let classes =
+JSON.parse(
+localStorage.getItem("smartMarkingClasses")
+) || [];
+
+let selectedClassId =
+localStorage.getItem("selectedClassId") || "";
+
+
+/* SAVE */
+
+function saveData(){
+
+localStorage.setItem(
+"smartMarkingClasses",
+JSON.stringify(classes)
+);
+
+localStorage.setItem(
+"selectedClassId",
+selectedClassId
+);
+
+}
+
+
+/* CLASS OPTIONS */
+
+function updateClassOptions(){
+
+const level =
+document.getElementById("level").value;
+
+const className =
+document.getElementById("className");
+
+className.innerHTML="";
+
+let options=[];
+
+if(level==="Primary"){
+
+options=[
+"Class 1",
+"Class 2",
+"Class 3",
+"Class 4",
+"Class 5",
+"Class 6",
+"Class 7"
+];
+
+}
+
+else if(level==="O-Level"){
+
+options=[
+"Form 1",
+"Form 2",
+"Form 3",
+"Form 4"
+];
+
+}
+
+else if(level==="A-Level"){
+
+options=[
+"Form 5",
+"Form 6"
+];
+
+}
+
+else{
+
+options=[
+"Year 1",
+"Year 2",
+"Year 3",
+"Year 4",
+"Year 5",
+"Year 6"
+];
+
+}
+
+options.forEach(option=>{
+
+const item =
+document.createElement("option");
+
+item.value=option;
+item.textContent=option;
+
+className.appendChild(item);
+
+});
+
+}
+
+
+/* CREATE CLASS */
+
+function createClass(){
+
+const level =
+document.getElementById("level").value;
+
+const className =
+document.getElementById("className").value;
+
+const exists =
+classes.some(
+c =>
+c.level===level &&
+c.className===className
+);
+
+if(exists){
+
+alert("This class already exists.");
+
+return;
+}
+
+const newClass={
+
+id:Date.now(),
+
+level:level,
+
+className:className,
+
+subjects:[],
+
+students:[]
+
+};
+
+classes.push(newClass);
+
+selectedClassId=newClass.id;
+
+saveData();
+
+updateClassSelector();
+
+displaySelectedClass();
+
+displaySubjects();
+
+createMarksInputs();
+
+displayStudents();
+
+updateDashboard();
+
+alert(
+level+
+" - "+
+className+
+" created successfully!"
+);
+
+}
+
+
+/* CLASS SELECTOR */
+
+function updateClassSelector(){
+
+const selector =
+document.getElementById("classSelector");
+
+selector.innerHTML =
+'<option value="">-- Select Class --</option>';
+
+classes.forEach(c=>{
+
+const option =
+document.createElement("option");
+
+option.value=c.id;
+
+option.textContent =
+c.level+
+" - "+
+c.className;
+
+selector.appendChild(option);
+
+});
+
+if(selectedClassId){
+
+selector.value=selectedClassId;
+
+}
+
+}
+
+
+/* SELECT CLASS */
+
+function selectClass(){
+
+const value =
+document.getElementById("classSelector").value;
+
+if(!value){
+
+selectedClassId="";
+
+saveData();
+
+displaySelectedClass();
+displaySubjects();
+createMarksInputs();
+displayStudents();
+updateDashboard();
+
+return;
+}
+
+selectedClassId=Number(value);
+
+saveData();
+
+const currentClass =
+getSelectedClass();
+
+if(currentClass){
+
+document.getElementById("level").value =
+currentClass.level;
+
+updateClassOptions();
+
+document.getElementById("className").value =
+currentClass.className;
+
+}
+
+displaySelectedClass();
+displaySubjects();
+createMarksInputs();
+displayStudents();
+updateDashboard();
+
+}
+
+
+/* GET CLASS */
+
+function getSelectedClass(){
+
+return classes.find(
+c =>
+c.id===Number(selectedClassId)
+);
+
+}
+
+
+/* DISPLAY CLASS */
+
+function displaySelectedClass(){
+
+const message =
+document.getElementById(
+"selectedClassMessage"
+);
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass){
+
+message.textContent =
+"No class selected.";
+
+return;
+}
+
+message.textContent =
+"Selected: "+
+currentClass.level+
+" - "+
+currentClass.className;
+
+}
+
+
+/* ADD SUBJECT */
+
+function addSubject(){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass){
+
+alert(
+"Please create or select a class first."
+);
+
+return;
+}
+
+const input =
+document.getElementById(
+"subjectInput"
+);
+
+const subject =
+input.value.trim();
+
+if(!subject){
+
+alert("Enter a subject name.");
+
+return;
+}
+
+const exists =
+currentClass.subjects.some(
+s =>
+s.toLowerCase()===
+subject.toLowerCase()
+);
+
+if(exists){
+
+alert(
+"This subject already exists."
+);
+
+return;
+}
+
+currentClass.subjects.push(subject);
+
+input.value="";
+
+saveData();
+
+displaySubjects();
+
+createMarksInputs();
+
+}
+
+
+/* DISPLAY SUBJECTS */
+
+function displaySubjects(){
+
+const container =
+document.getElementById("subjects");
+
+container.innerHTML="";
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+currentClass.subjects.forEach(
+(subject,index)=>{
+
+const div =
+document.createElement("div");
+
+div.className="subject";
+
+div.innerHTML=`
+
+<span>${subject}</span>
+
+<button
+onclick="removeSubject(${index})"
+>
+×
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+
+/* REMOVE SUBJECT */
+
+function removeSubject(index){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+if(currentClass.students.length>0){
+
+alert(
+"You cannot remove subjects after students have been added."
+);
+
+return;
+}
+
+currentClass.subjects.splice(index,1);
+
+saveData();
+
+displaySubjects();
+
+createMarksInputs();
+
+}
+
+
+/* MARK INPUTS */
+
+function createMarksInputs(){
+
+const container =
+document.getElementById(
+"marksInputs"
+);
+
+container.innerHTML="";
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+currentClass.subjects.forEach(
+subject=>{
+
+const wrapper =
+document.createElement("div");
+
+wrapper.innerHTML=`
+
+<label>${subject}</label>
+
+<input
+type="number"
+class="subject-mark"
+data-subject="${subject}"
+min="0"
+max="100"
+placeholder="0 - 100"
+>
+
+`;
+
+container.appendChild(wrapper);
+
+});
+
+}
+
+
+/* GRADE */
+
+function getGrade(mark){
+
+if(mark>=80)return"A";
+if(mark>=70)return"B";
+if(mark>=60)return"C";
+if(mark>=50)return"D";
+
+return"F";
+
+}
+
+
+/* ADD STUDENT */
+
+function addStudent(){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass){
+
+alert(
+"Please create or select a class first."
+);
+
+return;
+}
+
+if(currentClass.subjects.length===0){
+
+alert(
+"Please add subjects first."
+);
+
+return;
+}
+
+const name =
+document.getElementById(
+"studentName"
+).value.trim();
+
+if(!name){
+
+alert("Enter student name.");
+
+return;
+}
+
+const inputs =
+document.querySelectorAll(
+".subject-mark"
+);
+
+let marks={};
+
+let total=0;
+
+for(let input of inputs){
+
+const value =
+Number(input.value);
+
+if(
+input.value==="" ||
+value<0 ||
+value>100
+){
+
+alert(
+"Enter valid marks from 0 to 100 for every subject."
+);
+
+return;
+}
+
+const subject =
+input.dataset.subject;
+
+marks[subject]=value;
+
+total+=value;
+
+}
+
+const average =
+total/
+currentClass.subjects.length;
+
+const student={
+
+id:Date.now(),
+
+name:name,
+
+marks:marks,
+
+total:total,
+
+average:average,
+
+grade:getGrade(average)
+
+};
+
+currentClass.students.push(student);
+
+saveData();
+
+document.getElementById(
+"studentName"
+).value="";
+
+inputs.forEach(
+input=>input.value=""
+);
+
+displayStudents();
+
+updateDashboard();
+
+}
+
+
+/* DISPLAY STUDENTS */
+
+function displayStudents(list=null){
+
+const currentClass =
+getSelectedClass();
+
+const table =
+document.getElementById(
+"studentTable"
+);
+
+table.innerHTML="";
+
+if(!currentClass)return;
+
+let students =
+list || currentClass.students;
+
+students =
+[...students].sort(
+(a,b)=>
+b.average-a.average
+);
+
+students.forEach(
+(student,index)=>{
+
+const row =
+document.createElement("tr");
+
+row.innerHTML=`
+
+<td>${index+1}</td>
+
+<td>${student.name}</td>
+
+<td>${student.total}</td>
+
+<td>${student.average.toFixed(2)}</td>
+
+<td>${student.grade}</td>
+
+<td>
+
+<button
+class="action-btn edit-btn"
+onclick="editStudent(${student.id})"
+>
+✏️ Edit
+</button>
+
+<button
+class="action-btn report-btn"
+onclick="showReport(${student.id})"
+>
+Report
+</button>
+
+<button
+class="action-btn delete-btn"
+onclick="deleteStudent(${student.id})"
+>
+Delete
+</button>
+
+</td>
+
+`;
+
+table.appendChild(row);
+
+});
+
+}
+
+
+/* EDIT STUDENT */
+
+function editStudent(id){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+const student =
+currentClass.students.find(
+s=>s.id===id
+);
+
+if(!student)return;
+
+document.getElementById(
+"editStudentId"
+).value=id;
+
+document.getElementById(
+"editStudentName"
+).value=student.name;
+
+const container =
+document.getElementById(
+"editMarksInputs"
+);
+
+container.innerHTML="";
+
+currentClass.subjects.forEach(
+subject=>{
+
+const wrapper =
+document.createElement("div");
+
+wrapper.innerHTML=`
+
+<label>${subject}</label>
+
+<input
+type="number"
+class="edit-mark"
+data-subject="${subject}"
+min="0"
+max="100"
+value="${student.marks[subject]}"
+>
+
+`;
+
+container.appendChild(wrapper);
+
+});
+
+document.getElementById(
+"editSection"
+).style.display="block";
+
+window.scrollTo({
+
+top:
+document.getElementById(
+"editSection"
+).offsetTop,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* UPDATE STUDENT */
+
+function updateStudent(){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+const id =
+Number(
+document.getElementById(
+"editStudentId"
+).value
+);
+
+const student =
+currentClass.students.find(
+s=>s.id===id
+);
+
+if(!student)return;
+
+const name =
+document.getElementById(
+"editStudentName"
+).value.trim();
+
+if(!name){
+
+alert("Enter student name.");
+
+return;
+}
+
+const inputs =
+document.querySelectorAll(
+".edit-mark"
+);
+
+let marks={};
+
+let total=0;
+
+for(let input of inputs){
+
+const value =
+Number(input.value);
+
+if(
+input.value==="" ||
+value<0 ||
+value>100
+){
+
+alert(
+"Enter valid marks from 0 to 100."
+);
+
+return;
+}
+
+const subject =
+input.dataset.subject;
+
+marks[subject]=value;
+
+total+=value;
+
+}
+
+const average =
+total/
+currentClass.subjects.length;
+
+student.name=name;
+
+student.marks=marks;
+
+student.total=total;
+
+student.average=average;
+
+student.grade=getGrade(average);
+
+saveData();
+
+cancelEdit();
+
+displayStudents();
+
+updateDashboard();
+
+alert(
+"Student updated successfully!"
+);
+
+}
+
+
+/* CANCEL EDIT */
+
+function cancelEdit(){
+
+document.getElementById(
+"editSection"
+).style.display="none";
+
+}
+
+
+/* DELETE */
+
+function deleteStudent(id){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+if(!confirm(
+"Delete this student?"
+))return;
+
+currentClass.students =
+currentClass.students.filter(
+student =>
+student.id!==id
+);
+
+saveData();
+
+displayStudents();
+
+updateDashboard();
+
+}
+
+
+/* SEARCH */
+
+function searchStudent(){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+const query =
+document.getElementById(
+"searchInput"
+).value.toLowerCase();
+
+const results =
+currentClass.students.filter(
+student =>
+student.name
+.toLowerCase()
+.includes(query)
+);
+
+displayStudents(results);
+
+}
+
+
+/* DASHBOARD */
+
+function updateDashboard(){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass){
+
+document.getElementById(
+"studentCount"
+).textContent="0";
+
+document.getElementById(
+"classAverage"
+).textContent="0";
+
+document.getElementById(
+"highest"
+).textContent="0";
+
+document.getElementById(
+"lowest"
+).textContent="0";
+
+return;
+}
+
+const students =
+currentClass.students;
+
+document.getElementById(
+"studentCount"
+).textContent=
+students.length;
+
+if(students.length===0){
+
+document.getElementById(
+"classAverage"
+).textContent="0";
+
+document.getElementById(
+"highest"
+).textContent="0";
+
+document.getElementById(
+"lowest"
+).textContent="0";
+
+return;
+}
+
+const averages =
+students.map(
+student=>student.average
+);
+
+const classAverage =
+averages.reduce(
+(sum,value)=>
+sum+value,
+0
+)/
+averages.length;
+
+document.getElementById(
+"classAverage"
+).textContent=
+classAverage.toFixed(2);
+
+document.getElementById(
+"highest"
+).textContent=
+Math.max(...averages)
+.toFixed(2);
+
+document.getElementById(
+"lowest"
+).textContent=
+Math.min(...averages)
+.toFixed(2);
+
+}
+
+
+/* REPORT */
+
+function showReport(studentId){
+
+const currentClass =
+getSelectedClass();
+
+if(!currentClass)return;
+
+const student =
+currentClass.students.find(
+s=>s.id===studentId
+);
+
+if(!student)return;
+
+const sortedStudents =
+[...currentClass.students].sort(
+(a,b)=>
+b.average-a.average
+);
+
+const position =
+sortedStudents.findIndex(
+s=>s.id===studentId
+)+1;
+
+document.getElementById(
+"reportName"
+).textContent=
+student.name;
+
+document.getElementById(
+"reportClass"
+).textContent=
+currentClass.className;
+
+document.getElementById(
+"reportLevel"
+).textContent=
+currentClass.level+
+" - "+
+currentClass.className;
+
+document.getElementById(
+"reportPosition"
+).textContent=
+position;
+
+document.getElementById(
+"reportGrade"
+).textContent=
+student.grade;
+
+document.getElementById(
+"reportTotal"
+).textContent=
+student.total;
+
+document.getElementById(
+"reportAverage"
+).textContent=
+student.average.toFixed(2);
+
+document.getElementById(
+"reportOverallGrade"
+).textContent=
+student.grade;
+
+const table =
+document.getElementById(
+"reportSubjects"
+);
+
+table.innerHTML="";
+
+currentClass.subjects.forEach(
+subject=>{
+
+const mark =
+student.marks[subject];
+
+const row =
+document.createElement("tr");
+
+row.innerHTML=`
+
+<td>${subject}</td>
+
+<td>${mark}</td>
+
+<td>${getGrade(mark)}</td>
+
+`;
+
+table.appendChild(row);
+
+});
+
+document.getElementById(
+"reportCard"
+).style.display="block";
+
+window.scrollTo({
+
+top:
+document.getElementById(
+"reportCard"
+).offsetTop,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* CLOSE REPORT */
+
+function closeReport(){
+
+document.getElementById(
+"reportCard"
+).style.display="none";
+
+}
+
+
+/* START */
+
+updateClassOptions();
+
+updateClassSelector();
+
+if(selectedClassId){
+
+const currentClass =
+getSelectedClass();
+
+if(currentClass){
+
+document.getElementById(
+"level"
+).value=
+currentClass.level;
+
+updateClassOptions();
+
+document.getElementById(
+"className"
+).value=
+currentClass.className;
+
+}
+
+}
+
+displaySelectedClass();
+
+displaySubjects();
+
+createMarksInputs();
+
+displayStudents();
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
