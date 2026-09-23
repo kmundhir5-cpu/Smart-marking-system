@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,29 +17,39 @@ body{
     color:#222;
 }
 
+/* HEADER */
 header{
-    background:#1f4e78;
+    background:linear-gradient(135deg,#1f4e78,#2878b5);
     color:white;
-    padding:20px;
+    padding:28px 20px;
     text-align:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
 header h1{
     margin:0;
+    font-size:30px;
 }
 
+header p{
+    margin:8px 0 0;
+    opacity:.9;
+}
+
+/* CONTAINER */
 .container{
     width:95%;
-    max-width:1200px;
-    margin:20px auto;
+    max-width:1250px;
+    margin:25px auto;
 }
 
+/* CARDS */
 .card{
     background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    padding:22px;
+    margin-bottom:22px;
+    border-radius:14px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
 h2{
@@ -47,33 +57,44 @@ h2{
     color:#1f4e78;
 }
 
+/* INPUTS */
 label{
     display:block;
-    margin-top:10px;
+    margin-top:12px;
     font-weight:bold;
 }
 
 input,select,button{
     width:100%;
-    padding:10px;
-    margin-top:6px;
+    padding:11px;
+    margin-top:7px;
     border:1px solid #ccc;
-    border-radius:6px;
+    border-radius:7px;
     font-size:15px;
 }
 
+input:focus,select:focus{
+    outline:none;
+    border-color:#2878b5;
+    box-shadow:0 0 0 2px rgba(40,120,181,.1);
+}
+
+/* BUTTONS */
 button{
     background:#1f4e78;
     color:white;
     border:none;
     cursor:pointer;
     margin-top:15px;
+    transition:.2s;
 }
 
 button:hover{
     background:#163a5a;
+    transform:translateY(-1px);
 }
 
+/* SUBJECTS */
 .subject-row{
     display:flex;
     gap:10px;
@@ -85,23 +106,25 @@ button:hover{
 }
 
 .subject-row button{
-    width:150px;
+    width:160px;
 }
 
 .subjects{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
-    margin-top:15px;
+    gap:9px;
+    margin-top:16px;
 }
 
 .subject{
     background:#e8f1f8;
-    padding:8px 12px;
+    padding:9px 13px;
     border-radius:20px;
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:9px;
+    color:#1f4e78;
+    font-weight:bold;
 }
 
 .subject button{
@@ -112,54 +135,68 @@ button:hover{
     border-radius:50%;
 }
 
+/* DASHBOARD */
 .dashboard{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
+    gap:16px;
+    margin-bottom:22px;
 }
 
 .stat{
     background:white;
-    padding:20px;
-    border-radius:10px;
+    padding:22px;
+    border-radius:14px;
     text-align:center;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    border-top:4px solid #1f4e78;
 }
 
 .stat h3{
     margin:0;
     color:#666;
+    font-size:15px;
 }
 
 .stat p{
-    font-size:25px;
+    font-size:27px;
     font-weight:bold;
     color:#1f4e78;
     margin:10px 0 0;
 }
 
+/* MARKS */
 .marks-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
+    gap:12px;
+}
+
+/* TABLE */
+.table-container{
+    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:15px;
+    min-width:650px;
 }
 
 th,td{
     border:1px solid #ddd;
-    padding:10px;
+    padding:11px;
     text-align:center;
 }
 
 th{
     background:#1f4e78;
     color:white;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
 }
 
 .action-btn{
@@ -181,15 +218,14 @@ th{
 }
 
 .message{
-    padding:10px;
+    padding:11px;
     background:#fff3cd;
-    border-radius:6px;
-    margin-top:10px;
+    border-radius:7px;
+    margin-top:12px;
+    color:#664d03;
 }
 
-
 /* EDIT */
-
 #editSection{
     display:none;
     border-left:5px solid #f39c12;
@@ -198,12 +234,14 @@ th{
 .edit-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
+    gap:12px;
 }
 
+.cancel-edit{
+    background:#555;
+}
 
 /* REPORT */
-
 #reportCard{
     display:none;
 }
@@ -228,26 +266,28 @@ th{
 
 .info-box{
     border:1px solid #ddd;
-    padding:10px;
+    padding:12px;
+    border-radius:6px;
 }
 
 .summary{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
+    gap:12px;
     margin-top:20px;
 }
 
 .summary-box{
     border:1px solid #ddd;
-    padding:15px;
+    padding:16px;
     text-align:center;
+    border-radius:7px;
 }
 
 .summary-box strong{
     display:block;
-    font-size:20px;
-    margin-top:5px;
+    font-size:21px;
+    margin-top:6px;
     color:#1f4e78;
 }
 
@@ -255,13 +295,14 @@ th{
     background:#555;
 }
 
-.cancel-edit{
-    background:#555;
+/* EMPTY STATE */
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#777;
 }
 
-
 /* PRINT */
-
 @media print{
 
     body *{
@@ -288,8 +329,12 @@ th{
     }
 }
 
+/* MOBILE */
+@media(max-width:800px){
 
-@media(max-width:700px){
+    header h1{
+        font-size:24px;
+    }
 
     .dashboard{
         grid-template-columns:repeat(2,1fr);
@@ -311,6 +356,25 @@ th{
     .student-info,
     .summary{
         grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:92%;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .stat p{
+        font-size:24px;
     }
 }
 </style>
@@ -345,7 +409,7 @@ th{
 <select id="className"></select>
 
 <button onclick="createClass()">
-Create Class
+➕ Create Class
 </button>
 
 <label>Select Existing Class</label>
@@ -376,7 +440,7 @@ placeholder="Enter subject name"
 >
 
 <button onclick="addSubject()">
-Add Subject
+➕ Add Subject
 </button>
 
 </div>
@@ -391,22 +455,22 @@ Add Subject
 <div class="dashboard print-hide">
 
 <div class="stat">
-<h3>Students</h3>
+<h3>👨‍🎓 Students</h3>
 <p id="studentCount">0</p>
 </div>
 
 <div class="stat">
-<h3>Class Average</h3>
+<h3>📊 Class Average</h3>
 <p id="classAverage">0</p>
 </div>
 
 <div class="stat">
-<h3>Highest</h3>
+<h3>🏆 Highest</h3>
 <p id="highest">0</p>
 </div>
 
 <div class="stat">
-<h3>Lowest</h3>
+<h3>📉 Lowest</h3>
 <p id="lowest">0</p>
 </div>
 
@@ -432,7 +496,7 @@ placeholder="Enter student name"
 <div id="marksInputs" class="marks-grid"></div>
 
 <button onclick="addStudent()">
-Add Student
+➕ Add Student
 </button>
 
 </div>
@@ -459,7 +523,7 @@ placeholder="Student name"
 <div id="editMarksInputs" class="edit-grid"></div>
 
 <button onclick="updateStudent()">
-Update Student
+💾 Update Student
 </button>
 
 <button
@@ -494,7 +558,7 @@ oninput="searchStudent()"
 
 <h2>📊 Student Results</h2>
 
-<div style="overflow-x:auto;">
+<div class="table-container">
 
 <table>
 
@@ -981,6 +1045,15 @@ getSelectedClass();
 
 if(!currentClass)return;
 
+if(currentClass.subjects.length===0){
+
+container.innerHTML =
+'<div class="empty">No subjects added yet.</div>';
+
+return;
+
+}
+
 currentClass.subjects.forEach(
 (subject,index)=>{
 
@@ -1052,6 +1125,15 @@ const currentClass =
 getSelectedClass();
 
 if(!currentClass)return;
+
+if(currentClass.subjects.length===0){
+
+container.innerHTML =
+'<div class="empty">Add subjects first.</div>';
+
+return;
+
+}
 
 currentClass.subjects.forEach(
 subject=>{
@@ -1232,6 +1314,20 @@ students =
 b.average-a.average
 );
 
+if(students.length===0){
+
+table.innerHTML=`
+<tr>
+<td colspan="6" class="empty">
+No students found.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
 students.forEach(
 (student,index)=>{
 
@@ -1263,14 +1359,14 @@ onclick="editStudent(${student.id})"
 class="action-btn report-btn"
 onclick="showReport(${student.id})"
 >
-Report
+📄 Report
 </button>
 
 <button
 class="action-btn delete-btn"
 onclick="deleteStudent(${student.id})"
 >
-Delete
+🗑️ Delete
 </button>
 
 </td>
